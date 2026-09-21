@@ -5,7 +5,7 @@ I build AI agent systems and run the infrastructure underneath them. 6 machines,
 ### What I build
 
 **[Kima Hub](https://github.com/Chevron7Locked/kima-hub)** · 1,280 stars
-Self-hosted music server. Every track carries a 514-dimension vector fusing CLAP audio embeddings with valence and arousal. Each listener is the average of what they've played. Discovery is cosine distance over a pgvector HNSW index. Across 18,255 tagged tracks, nearest neighbors share a mood 24% of the time against 7% for random pairs.
+Self-hosted music server. Every track carries a 514-dimension vector fusing CLAP audio embeddings with valence and arousal. Each listener is the average of what they've played. Discovery is cosine distance over a pgvector HNSW index. Across 18,255 tagged tracks, nearest neighbors share a mood 24% of the time against 7% for random pairs. It plugs into OSOL as a configured service; v2 adds a 35-route social surface and end-to-end encrypted messages sharing a wire format with OSOL.
 
 **ADAgent** *(private)*
 Detects across the WCAG 2.2 A/AA surface with 36 engines and repairs 25 violation classes without a human. Traces each violation back to whatever produced it: a template, a stylesheet, PHP, a row in the database. Then writes the fix. Mixed agentic and deterministic by design: the agent loop finds the source and picks the route, the fixers it dispatches to are deterministic scripts. The model handles the judgment calls, alt text and documenting what it refused to touch. 5 checks run before anything merges.
@@ -14,7 +14,10 @@ Detects across the WCAG 2.2 A/AA surface with 36 engines and repairs 25 violatio
 Semantic search service in production. Answers carry cited passages. 1,735 source documents across roughly 17 collections, every PDF verified and checksummed. Serves five agent seats. Python, PostgreSQL, pgvector.
 
 **Silta** *(private, deployed)* · `silta-hub`
-App-agnostic social backbone in Go. The core deals only in generic concepts: activities, presence, profiles, chat. App semantics live in connectors. One static binary over PostgreSQL and Redis. Instances register with each other over Ed25519.
+App-agnostic social backbone in Go, and the protocol layer the rest of this runs on. The core deals only in generic concepts: activities, presence, profiles, chat. App semantics live in connectors. One static binary over PostgreSQL and Redis. Instances register with each other over Ed25519.
+
+**OSOL** *(private)*
+A private social platform for invited members, running as an instance on Silta. AOL-era chrome over a native social layer: IM, group chat, chronological feed, mail, buddy list, presence. Go backend on PostgreSQL 18, Tauri 2 desktop app in React 19. 182,000 lines. Eras are per-user generational lenses, and a cross-user surface renders in the viewer's era rather than the author's. The core ships identically for any deployer; operator-specific services plug in behind a proxy with credentials held backend-side. Runs fully with Silta disconnected.
 
 **[lm-chat](https://github.com/Chevron7Locked/lm-chat)** · Web front end for LM Studio. Browser and phone access to models you host, MCP tools, and a memory that distills your context out of past conversations and carries it across model swaps.
 
