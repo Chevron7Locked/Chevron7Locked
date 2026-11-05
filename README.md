@@ -1,41 +1,24 @@
 # Kevin O'Neill
 
-I build AI agent systems and run the infrastructure underneath them. 6 machines, models I host myself. Professional developer since 2016, leading development teams since 2020.
+My dad got me a reel-to-reel recorder when I was first learning drums, and I've been recording ever since. I worked in studios before I got into software: SoundScape Studios in Chicago with Mike Kolar, then an internship with Joey Sturgis at Foundation in Michigan on Crown the Empire's *The Fallout*, tracked with my Lauten Audio Oceanus. I played shows and short tours, and recorded myself and a lot of local artists.
 
-### What I build
+I took C++ at Elgin Community College through most of the second year and taught myself after that. My first site was sassykatrecords.com in 2012, for my own studio. I've been a professional developer since 2016 and I've run engineering teams since 2020, up to 15 developers at a time.
 
-**[Kima Hub](https://github.com/Chevron7Locked/kima-hub)** · 1,280 stars
-Self-hosted music server. Every track carries a 514-dimension vector fusing CLAP audio embeddings with valence and arousal. Each listener is the average of what they've played. Discovery is cosine distance over a pgvector HNSW index. Across 18,255 tagged tracks, nearest neighbors share a mood 24% of the time against 7% for random pairs. It plugs into OSOL as a configured service; v2 adds a 35-route social surface and end-to-end encrypted messages sharing a wire format with OSOL.
+In the past year and a half I've built an audio matching engine, a native iOS app and post-quantum encrypted messaging by running AI agents the way I run my teams. The models run on five machines of my own, and the agents work from a private library of over 500 books and papers.
 
-**ADAgent** *(private)*
-Detects across the WCAG 2.2 A/AA surface with 36 engines and repairs 25 violation classes without a human. Traces each violation back to whatever produced it: a template, a stylesheet, PHP, a row in the database. Then writes the fix. Mixed agentic and deterministic by design: the agent loop finds the source and picks the route, the fixers it dispatches to are deterministic scripts. The model handles the judgment calls, alt text and documenting what it refused to touch. 5 checks run before anything merges.
+### Projects
 
-**Research corpus** *(private)*
-Semantic search service in production. Answers carry cited passages. 1,735 source documents across roughly 17 collections, every PDF verified and checksummed. Serves five agent seats. Python, PostgreSQL, pgvector.
+[Kima](https://github.com/Chevron7Locked/kima-hub) is an open-source music server you run at home, with over 1,290 stars. Play a song, ask for more like it, and it looks for tracks that feel the same. Each track gets 512 numbers from an audio model called CLAP, two more for how positive and how intense it feels, and the artist's genres from MusicBrainz. In 446 odd-one-out listening tests, matching agreed with people 69.7% of the time. Chance is 33%.
 
-**Silta** *(private, deployed)* · `silta-hub`
-App-agnostic social backbone in Go, and the protocol layer the rest of this runs on. The core deals only in generic concepts: activities, presence, profiles, chat. App semantics live in connectors. One static binary over PostgreSQL and Redis. Instances register with each other over Ed25519.
+[Kima for iOS](https://github.com/Chevron7Locked/kima-ios) is the native app, in TestFlight with the source public. It draws the map of your library in Metal.
 
-**OSOL** *(private)*
-A private social platform for invited members, running as an instance on Silta. AOL-era chrome over a native social layer: IM, group chat, chronological feed, mail, buddy list, presence. Go backend on PostgreSQL 18, Tauri 2 desktop app in React 19. 182,000 lines. Eras are per-user generational lenses, and a cross-user surface renders in the viewer's era rather than the author's. The core ships identically for any deployer; operator-specific services plug in behind a proxy with credentials held backend-side. Runs fully with Silta disconnected.
+Silta is the messaging server my apps plug into, one Go binary on PostgreSQL and Redis, running at silta.chevron7.io from a private repo. One-to-one messages are end-to-end encrypted with X25519 plus post-quantum ML-KEM-768, so the server only relays ciphertext. OSOL, a private social app for my friends and family based on the old AOL platforms, runs on Silta.
 
-**[lm-chat](https://github.com/Chevron7Locked/lm-chat)** · Web front end for LM Studio. Browser and phone access to models you host, MCP tools, and a memory that distills your context out of past conversations and carries it across model swaps.
+ADAgent, which I built at my last job, is company property, so there's no link. It traces each WCAG violation to its source and fixes it there deterministically, and the model only makes judgment calls like alt text. It ran on about half of our client sites and fixed around 85% of the violations found on each one.
 
 ### Open source
 
-Two pull requests merged into [openclaw](https://github.com/openclaw/openclaw), 390k stars: auto-failover overrides cleared so the primary model retries after a fallback, and gateway installs no longer dropping `.env` variables. One merged into [freelingo](https://github.com/artcc/freelingo).
-
-Open pull requests against [Hermes Agent](https://github.com/NousResearch/hermes-agent) and [Hermes WebUI](https://github.com/nesquena/hermes-webui): CLI root resolution, supervised-process restarts, idempotent run-journal recovery, per-chat reasoning effort.
-
-### Working with
-
-`TypeScript` `Python` `Go` `SvelteKit` `PostgreSQL + pgvector` `Redis` `Docker` `vLLM` `ONNX Runtime` `MCP`
-
-### Audio before software
-
-Interned with Joey Sturgis at Foundation in Michigan for Crown the Empire's *The Fallout*, tracked with my Lauten Audio Oceanus. Before that, SoundScape Studios in Chicago with Mike Kolar. Playing shows, short tours, recording myself and a lot of local artists.
-
-Elgin Community College, C++ coursework through most of the second year. Self-taught after that. First site was sassykatrecords.com in 2012, for my own studio.
+I have two pull requests merged in [openclaw](https://github.com/openclaw/openclaw) (about 394k stars). One clears auto-failover overrides so the primary model is retried, and the other includes `.env` variables in the gateway service environment on install. Another is merged in [freelingo](https://github.com/artcc/freelingo), and I have three open in [Hermes Agent](https://github.com/NousResearch/hermes-agent).
 
 ---
 
